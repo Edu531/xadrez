@@ -1,6 +1,6 @@
 package borardgame;
 
-public class Piece {
+public abstract class Piece {
 	
 	protected Position position;
 	private Board board;
@@ -14,9 +14,23 @@ public class Piece {
 		return board;
 	}
 
+	public abstract boolean[][] possiblesMoves();
 	
+	public boolean possibleMove(Position position) {
+		return possiblesMoves()[position.getRow()][position.getColumn()];
+	}
 	
-	
+	public boolean isThereAnyPossibleMove() {
+		boolean[][] mat = possiblesMoves();
+		for (int i=0; i<mat.length; i++) {
+			for (int j=0; j<mat.length; j++) {
+				if (mat[i][j]) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 	
 	
 }
